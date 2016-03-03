@@ -1,16 +1,7 @@
 Portfolio::Application.routes.draw do
-  get "trips/new"
-
-  get "airports/new"
-
-  get "flights/new"
 
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :flights
-  resources :airports
-  resources :trips
-  resources :routes
 
   root :to => 'pages#home'
   
@@ -19,8 +10,8 @@ Portfolio::Application.routes.draw do
   match '/about', :to => 'pages#about'
   match '/other', :to => 'pages#other'
   
-  match '/signup', :to => 'users#new'
-  match '/login', :to => 'sessions#new'
+  #match '/signup', :to => 'users#new'
+  #match '/login', :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy', :via => :delete
   
   match '/computers', :to => 'pages#computers'
@@ -42,30 +33,34 @@ Portfolio::Application.routes.draw do
   
   match '/pax_prime_2012', :to => 'pages#pax_prime_2012'
   
-  match '/flightlog', :to => 'pages#flightlog'
-  match '/flightlog/:region', :to => 'pages#flightlog', :as => :show_flightlog_region
-  match '/flights/sort/:sort_category/:sort_direction' => 'flights#index', :as => :sort_flights
-  match '/flights/from/:start_date/to/:end_date', :to => 'flights#show_date_range', :as => :show_date_range
-  match '/flights/from/:start_date/to/:end_date/:region', :to => 'flights#show_date_range', :as => :show_date_range_region
-  match '/flights/year/:year', :to => 'flights#show_date_range', :as => :show_year
-  match '/flights/year/:year/:region', :to => 'flights#show_date_range', :as => :show_year_region
-  match '/trips/:trip/section/:section' => 'trips#show_section', :as => :show_section
-  match '/aircraft' => 'flights#index_aircraft'
-  match '/aircraft/sort/:sort_category/:sort_direction' => 'flights#index_aircraft', :as => :sort_aircraft
-  match '/aircraft/:aircraft_family' => 'flights#show_aircraft', :as => :show_aircraft
-  match '/airlines' => 'flights#index_airlines'
-  match '/airlines/sort/:sort_category/:sort_direction' => 'flights#index_airlines', :as => :sort_airlines
-  match '/airlines/:airline' => 'flights#show_airline', :as => :show_airline
-  match '/airports/sort/:sort_category/:sort_direction' => 'airports#index', :as => :sort_airports
-  match '/airports/:id/sort/:sort_category/:sort_direction' => 'airports#show', :as => :sort_airport
-  match '/operators/:operator' => 'flights#show_operator', :as => :show_operator
-  match '/operators/:operator/:fleet_number' => 'flights#show_fleet_number', :as => :show_fleet_number
-  match '/classes' => 'flights#index_classes'
-  match '/classes/:travel_class' => 'flights#show_class', :as => :show_class
-  match '/tails' => 'flights#index_tails'
-  match '/tails/sort/:sort_category/:sort_direction' => 'flights#index_tails', :as => :sort_tails
-  match '/tails/:tail_number' => 'flights#show_tail', :as => :show_tail
-  match '/routes/edit/:airport1/:airport2' => 'routes#edit', :as => :edit_route
-  match '/routes/sort/:sort_category/:sort_direction' => 'routes#index', :as => :sort_routes
-  match '/trips/sort/:sort_category/:sort_direction' => 'trips#index', :as => :sort_trips
+  # Permanently redirect legacy flight log routes to Flight Historian:
+  
+  match '/flightlog',       :to => redirect('http://www.flighthistorian.com/', :status => 301)
+  match '/flightlog/*all',  :to => redirect('http://www.flighthistorian.com/', :status => 301)
+  
+  match '/flights',         :to => redirect('http://www.flighthistorian.com/flights', :status => 301)
+  match '/flights/*all',    :to => redirect('http://www.flighthistorian.com/flights', :status => 301)
+
+  match '/trips',           :to => redirect('http://www.flighthistorian.com/trips', :status => 301)
+  match '/trips/*all',      :to => redirect('http://www.flighthistorian.com/trips', :status => 301)
+  
+  match '/aircraft',        :to => redirect('http://www.flighthistorian.com/aircraft', :status => 301)
+  match '/aircraft/*all',   :to => redirect('http://www.flighthistorian.com/aircraft', :status => 301)
+  
+  match '/airlines',        :to => redirect('http://www.flighthistorian.com/airlines', :status => 301)
+  match '/airlines/*all',   :to => redirect('http://www.flighthistorian.com/airlines', :status => 301)
+  match '/operators/*all',  :to => redirect('http://www.flighthistorian.com/airlines', :status => 301)
+  
+  match '/airports',        :to => redirect('http://www.flighthistorian.com/airports', :status => 301)
+  match '/airports/*all',   :to => redirect('http://www.flighthistorian.com/airports', :status => 301)
+  
+  match '/classes',         :to => redirect('http://www.flighthistorian.com/classes', :status => 301)
+  match '/classes/*all',    :to => redirect('http://www.flighthistorian.com/classes', :status => 301)
+  
+  match '/tails',           :to => redirect('http://www.flighthistorian.com/tails', :status => 301)
+  match '/tails/*all',      :to => redirect('http://www.flighthistorian.com/tails', :status => 301)
+  
+  match '/routes',          :to => redirect('http://www.flighthistorian.com/routes', :status => 301)
+  match '/routes/*all',     :to => redirect('http://www.flighthistorian.com/routes', :status => 301)
+  
 end

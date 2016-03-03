@@ -1,0 +1,30 @@
+/usr/local/opt/ruby/bin/ruby -r ./siteconf20151222-63076-1u5g1e6.rb extconf.rb
+checking for rb_thread_blocking_region()... no
+checking for rb_wait_for_single_fd()... yes
+checking for mysql.h... yes
+checking for errmsg.h... yes
+checking for mysqld_error.h... yes
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling client.c
+In file included from client.c:1:
+In file included from ./mysql2_ext.h:39:
+In file included from ./client.h:11:
+/usr/local/Cellar/ruby/2.2.4/include/ruby-2.2.0/ruby/backward/rubysig.h:14:2: warning: rubysig.h is obsolete [-W#warnings]
+#warning rubysig.h is obsolete
+ ^
+In file included from client.c:1:
+In file included from ./mysql2_ext.h:39:
+./client.h:23:3: error: use of undeclared identifier 'TRAP_BEG'
+  TRAP_BEG;
+  ^
+./client.h:25:3: error: use of undeclared identifier 'TRAP_END'
+  TRAP_END;
+  ^
+1 warning and 2 errors generated.
+make: *** [client.o] Error 1
+
+make failed, exit code 2
